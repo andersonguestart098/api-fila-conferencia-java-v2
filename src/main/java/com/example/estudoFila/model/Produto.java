@@ -1,6 +1,7 @@
 package com.example.estudoFila.model;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,6 +19,7 @@ public class Produto {
     @NotBlank(message = "Descrição do produto inválida!")
     private String descProduto;
 
+    @Positive(message = "Preço do produto inválido!")
     private double preco;
 
 }

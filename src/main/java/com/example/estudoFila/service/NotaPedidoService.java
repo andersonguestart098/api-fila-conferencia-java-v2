@@ -41,14 +41,21 @@ public class NotaPedidoService {
         nota.setRazaoSocial(parceiro.getRazaoSocial());
         nota.setStatusConferencia(StatusConferencia.PENDENTE);
 
-        for (ItemNota item : nota.getItens()) {
+        for (ItemNota item : nota.getItem()) {
 
         Produto produto = produtoRepository.findByCodProduto(item.getCodProduto())
                 .orElseThrow(() -> new RecursoNaoEncontrado("Produto não encontrado!"));
 
         item.setDescProduto(produto.getDescProduto());
 
+        double valorNota = produto.getPreco() + nota.getValorNota();
+
+        nota.setValorNota(valorNota);
+
+
         }
+
+
 
         NotaPedido notaSalva = notaPedidoRepository.save(nota);
 

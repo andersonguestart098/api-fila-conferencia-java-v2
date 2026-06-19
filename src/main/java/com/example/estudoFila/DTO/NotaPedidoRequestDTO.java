@@ -11,5 +11,5 @@ public record NotaPedidoRequestDTO(
 
         double valorNota,
 
-        List<ItemNota> itens
+        List<ItemNota> item
 ) {}

@@ -5,6 +5,6 @@ public record ProdutoRequestDTO(
 
         String descProduto,
 
-        double precoProduto
+        double preco
 
 ) {}

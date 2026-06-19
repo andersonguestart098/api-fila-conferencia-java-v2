@@ -23,7 +23,7 @@ public class FilaConferenciaController {
     public ResponseEntity<ApiResponse<FilaConferenciaResponseDTO>> criar(@RequestBody FilaConferenciaRequestDTO dto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.success(201, "Conferencia criada", conferenciaService.criar(dto)));
+                .body(ApiResponse.success(201, "Conferencia criada!", conferenciaService.criar(dto)));
 
 
     }

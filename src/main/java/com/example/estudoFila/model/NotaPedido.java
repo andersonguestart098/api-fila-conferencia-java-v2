@@ -25,8 +25,10 @@ public class NotaPedido {
     @NotBlank(message = "Tipo de faturamento inválido!")
     private String tipoFat;
 
+    private double valorNota;
+
     private StatusConferencia statusConferencia;
 
-    private List<ItemNota> itens;
+    private List<ItemNota> item;
 
 }

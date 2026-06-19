@@ -62,7 +62,7 @@ public class FilaConferenciaService {
 
         boolean prodEncontrado = false;
 
-        for (ItemNota item : nota.getItens()) {
+        for (ItemNota item : nota.getItem()) {
 
 
             if (item.getCodProduto().equals(codProduto)) {
