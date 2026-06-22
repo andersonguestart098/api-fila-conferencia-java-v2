@@ -5,7 +5,7 @@ import com.example.estudoFila.DTO.FilaConferenciaResponseDTO;
 import com.example.estudoFila.model.FilaConfencia;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 public interface FilaConferenciaMapper {
 
     FilaConfencia toEntity(FilaConferenciaRequestDTO dto);

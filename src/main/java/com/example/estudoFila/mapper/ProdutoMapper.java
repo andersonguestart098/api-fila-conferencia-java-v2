@@ -5,7 +5,7 @@ import com.example.estudoFila.DTO.ProdutoResponseDTO;
 import com.example.estudoFila.model.Produto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 public interface ProdutoMapper {
 
     Produto toEntity(ProdutoRequestDTO dto);

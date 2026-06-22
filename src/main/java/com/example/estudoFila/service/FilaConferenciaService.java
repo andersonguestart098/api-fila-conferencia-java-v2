@@ -14,10 +14,12 @@ import com.example.estudoFila.repository.FilaConferenciaRepository;
 import com.example.estudoFila.repository.NotaPedidoRepository;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class FilaConferenciaService {
@@ -35,9 +37,15 @@ public class FilaConferenciaService {
 
     public FilaConferenciaResponseDTO criar(FilaConferenciaRequestDTO dto) {
 
+        log.info("DTO PASSADO: {}", dto);
+
         FilaConfencia confencia = filaConferenciaMapper.toEntity(dto);
 
+        log.info("DTO CONVERTIDO: {}", confencia);
+
         FilaConfencia conferenciaSalva = filaConferenciaRepository.save(confencia);
+
+        log.info("Conferencia: {}", conferenciaSalva);
 
         return filaConferenciaMapper.toDTO(conferenciaSalva);
 
@@ -52,10 +60,10 @@ public class FilaConferenciaService {
 
     }
 
-    public NotaPedidoResponseDTO conferirItem(String nuNota, String codProduto, double qtdConferida) {
+    public NotaPedidoResponseDTO conferirItem(String id, String codProduto, double qtdConferida) {
 
-        NotaPedido nota = notaPedidoRepository.findByNuNota(nuNota)
-                .orElseThrow(() -> new RecursoNaoEncontrado("Nota não encontrada para nunota: " + nuNota));
+        NotaPedido nota = notaPedidoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontrado("Nota não encontrada para nunota: " + id));
 
         produtoRepository.findByCodProduto(codProduto)
                 .orElseThrow(() -> new RecursoNaoEncontrado("Produto não encontrado!"));

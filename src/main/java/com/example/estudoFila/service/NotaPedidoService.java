@@ -13,10 +13,12 @@ import com.example.estudoFila.repository.NotaPedidoRepository;
 import com.example.estudoFila.repository.ParceiroRepository;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class NotaPedidoService {
@@ -38,29 +40,38 @@ public class NotaPedidoService {
 
         NotaPedido nota = notaPedidoMapper.toEntity(dto);
 
+        log.info("DTO CONVERTIDO: {}", nota);
+
         nota.setRazaoSocial(parceiro.getRazaoSocial());
+        log.info("Razao social setada na nota: {}", nota);
+
         nota.setStatusConferencia(StatusConferencia.PENDENTE);
+        log.info("Status da conferencia setada para PENDENTE {}", nota);
+
+        log.info("Itens da nota antes do for: {}", nota.getItem());
 
         for (ItemNota item : nota.getItem()) {
+
+            log.info("Entrou no for {}", item);
 
         Produto produto = produtoRepository.findByCodProduto(item.getCodProduto())
                 .orElseThrow(() -> new RecursoNaoEncontrado("Produto não encontrado!"));
 
         item.setDescProduto(produto.getDescProduto());
 
-        double valorNota = produto.getPreco() + nota.getValorNota();
+        log.info("Produto setado: {}", item);
 
-        nota.setValorNota(valorNota);
+
+        log.info("itens: {}", item);
+
+        nota.setValorNota(nota.getValorNota() + produto.getPreco() * item.getQtdNeg());
 
 
         }
 
-
-
         NotaPedido notaSalva = notaPedidoRepository.save(nota);
 
         return notaPedidoMapper.toDTO(notaSalva);
-
 
     }
 
@@ -71,7 +82,6 @@ public class NotaPedidoService {
                 .map(notaPedidoMapper::toDTO)
                 .toList();
 
-
     }
 
     public List<NotaPedidoResponseDTO> buscar(String codParceiro) {
@@ -79,7 +89,6 @@ public class NotaPedidoService {
         return notaPedidoRepository.findByCodParceiro(codParceiro).stream()
                 .map(notaPedidoMapper::toDTO)
                 .toList();
-
 
     }
 

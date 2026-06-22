@@ -6,7 +6,5 @@ import java.util.List;
 
 public record FilaConferenciaResponseDTO(
 
-        String nuConf,
-
-        List<ItemNota> itensConf
+        String idNota
 ) {}

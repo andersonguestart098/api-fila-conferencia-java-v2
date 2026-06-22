@@ -44,11 +44,11 @@ public class FilaConferenciaController {
      */
 
     @PatchMapping("/{nuNota}")
-    public ResponseEntity<ApiResponse<NotaPedidoResponseDTO>> conferir(@PathVariable String nuNota,
+    public ResponseEntity<ApiResponse<NotaPedidoResponseDTO>> conferir(@PathVariable String id,
                                                                        @RequestParam String codProduto,
                                                                        @RequestParam double qtdConf) {
 
-        return ResponseEntity.ok(ApiResponse.success(200, "Item conferido!", conferenciaService.conferirItem(nuNota, codProduto, qtdConf)));
+        return ResponseEntity.ok(ApiResponse.success(200, "Item conferido!", conferenciaService.conferirItem(id, codProduto, qtdConf)));
 
     }
 

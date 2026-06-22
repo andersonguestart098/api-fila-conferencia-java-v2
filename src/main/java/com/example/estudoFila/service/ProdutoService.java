@@ -7,10 +7,12 @@ import com.example.estudoFila.mapper.ProdutoMapper;
 import com.example.estudoFila.model.Produto;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ProdutoService {
@@ -23,6 +25,7 @@ public class ProdutoService {
         Produto produto = produtoMapper.toEntity(dto);
 
         Produto salvo = produtoRepository.save(produto);
+        log.info("PRODUTO: {}", salvo);
 
         return produtoMapper.toDTO(salvo);
 
