@@ -41,8 +41,6 @@ public class FilaConferenciaService {
 
         FilaConfencia confencia = filaConferenciaMapper.toEntity(dto);
 
-        log.info("DTO CONVERTIDO: {}", confencia);
-
         FilaConfencia conferenciaSalva = filaConferenciaRepository.save(confencia);
 
         log.info("Conferencia: {}", conferenciaSalva);
@@ -78,6 +76,8 @@ public class FilaConferenciaService {
                 prodEncontrado = true;
 
                 item.setQtdConf(qtdConferida);
+
+                log.info("item conferido: {}", qtdConferida);
 
             if (item.getQtdConf() < item.getQtdNeg()) {
                 nota.setStatusConferencia(StatusConferencia.DIVERGENTE);
