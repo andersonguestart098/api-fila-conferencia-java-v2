@@ -16,6 +16,7 @@ import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class FilaConferenciaService {
 
     }
 
+    @Transactional
     public NotaPedidoResponseDTO conferirItem(String id, String codProduto, double qtdConferida) {
 
         NotaPedido nota = notaPedidoRepository.findById(id)
