@@ -8,6 +8,8 @@ import com.example.estudoFila.model.Produto;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,12 +33,10 @@ public class ProdutoService {
 
     }
 
-    public List<ProdutoResponseDTO> listar() {
+    public Page<ProdutoResponseDTO> listar(Pageable pageable) {
 
-        return produtoRepository.findAll()
-                .stream()
-                .map(produtoMapper::toDTO)
-                .toList();
+        return produtoRepository.findAll(pageable)
+                .map(produtoMapper::toDTO);
 
     }
 

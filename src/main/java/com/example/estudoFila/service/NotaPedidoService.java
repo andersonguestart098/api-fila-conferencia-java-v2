@@ -14,6 +14,8 @@ import com.example.estudoFila.repository.ParceiroRepository;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,12 +79,10 @@ public class NotaPedidoService {
 
     }
 
-    public List<NotaPedidoResponseDTO> listar() {
+    public Page<NotaPedidoResponseDTO> listar(Pageable pageable) {
 
-        return notaPedidoRepository.findAll()
-                .stream()
-                .map(notaPedidoMapper::toDTO)
-                .toList();
+        return notaPedidoRepository.findAll(pageable)
+                .map(notaPedidoMapper::toDTO);
 
     }
 

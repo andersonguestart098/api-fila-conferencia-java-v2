@@ -7,6 +7,7 @@ import com.example.estudoFila.mapper.ParceiroMapper;
 import com.example.estudoFila.model.Parceiro;
 import com.example.estudoFila.repository.ParceiroRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,9 +30,9 @@ public class ParceiroService {
 
     }
 
-    public List<ParceiroResponseDTO> listar() {
+    public List<ParceiroResponseDTO> listar(Pageable pageable) {
 
-         return parceiroRepository.findAll().stream()
+         return parceiroRepository.findAll(pageable).stream()
                  .map(parceiroMapper::toDTO)
                  .toList();
 

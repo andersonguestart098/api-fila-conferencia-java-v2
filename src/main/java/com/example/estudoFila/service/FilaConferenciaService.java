@@ -15,6 +15,8 @@ import com.example.estudoFila.repository.NotaPedidoRepository;
 import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,12 +52,10 @@ public class FilaConferenciaService {
 
     }
 
-    public List<FilaConferenciaResponseDTO> listar() {
+    public Page<FilaConferenciaResponseDTO> listar(Pageable pageable) {
 
-        return filaConferenciaRepository.findAll()
-                .stream()
-                .map(filaConferenciaMapper::toDTO)
-                .toList();
+        return filaConferenciaRepository.findAll(pageable)
+                .map(filaConferenciaMapper::toDTO);
 
     }
 
