@@ -15,6 +15,7 @@ import com.example.estudoFila.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class NotaPedidoService {
     private final ProdutoRepository produtoRepository;
 
 
+    @Transactional
     public NotaPedidoResponseDTO criar(NotaPedidoRequestDTO dto) {
 
         Parceiro parceiro = parceiroRepository.findByCodParceiro(dto.codParceiro())
